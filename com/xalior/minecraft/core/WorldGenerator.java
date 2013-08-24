@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import cpw.mods.fml.common.FMLLog;
@@ -27,7 +28,12 @@ public class WorldGenerator implements IWorldGenerator {
                         generateNether();
                         break;
                 case 0:
-                        generateSurface(world, random, chunkX * 16, chunkZ * 16);
+                        BiomeGenBase b = world.getBiomeGenForCoords(chunkX, chunkZ);
+                        if(b.biomeName.contains("Hill")) {
+                            // Begin hilly generation!
+                        	Core.log("Have found a Hilly biome, make the Xalorium flow!");
+                            generateSurface(world, random, chunkX * 16, chunkZ * 16);
+                        }
                         break;
                 case 1:
                         generateEnd();
@@ -38,11 +44,11 @@ public class WorldGenerator implements IWorldGenerator {
         public void generateSurface(World world, Random rand, int chunkX, int chunkZ) {
                 for (int i = 0; i < 20; i++) {
                         int randPosX = chunkX + rand.nextInt(16);
-                        int randPosY = rand.nextInt(64); // CHANGE 64 TO THE MAX Y LEVEL YOU WANT TO SEE YOUR ORE
+                        int randPosY = 64+rand.nextInt(64); //  MAX Y LEVEL YOU WANT TO SEE YOUR ORE
                         int randPosZ = chunkZ + rand.nextInt(16);
  
                         // CHANGE THE 6 BELOW TO THE MAX AMOUNT OF NODES YOU WANT IN A VEIN
-                        (new WorldGenMinable(Core.xaloriumOre.blockID, 6)).generate(world, rand, randPosX, randPosY, randPosZ);
+                        (new WorldGenMinable(Core.xaloriumOre.blockID, 3+rand.nextInt(5))).generate(world, rand, randPosX, randPosY, randPosZ);
                 }
         }
  
