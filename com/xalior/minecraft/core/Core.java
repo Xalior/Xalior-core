@@ -18,12 +18,12 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid="xalior-core", name="Xalior's core worldgen+basics", version="0.0.0.<SERIAL>")
+@Mod(modid="xalior-core", name="Xalior's core worldgen+basics", version="0.0.0.<>")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class Core {
 	public final static String modid = "xalior-core";
 	public final static String name = "Xalior's core worldgen+basics";
-	public final static String version = "0.0.0.<SERIAL>";
+	public final static String version = "0.0.0.<>";
 	
 	public final static Block xaloriumOre = new BlockXaloriumOre(1300, Material.rock);
 
