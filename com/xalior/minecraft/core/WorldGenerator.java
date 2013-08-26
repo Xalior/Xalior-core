@@ -29,9 +29,10 @@ public class WorldGenerator implements IWorldGenerator {
                         break;
                 case 0:
                         BiomeGenBase b = world.getBiomeGenForCoords(chunkX, chunkZ);
-                        if(b.biomeName.contains("Hill")) {
+             
+                        if(b.biomeName.contains("Hill") ||
+                           b.biomeName.contains("Mountain")) {
                             // Begin hilly generation!
-                        	Core.log("Have found a Hilly biome, make the Xalorium flow!");
                             generateSurface(world, random, chunkX * 16, chunkZ * 16);
                         }
                         break;
@@ -42,13 +43,11 @@ public class WorldGenerator implements IWorldGenerator {
         }
  
         public void generateSurface(World world, Random rand, int chunkX, int chunkZ) {
-                for (int i = 0; i < 20; i++) {
+                for (int i = 0; i < Core.settingXaloriumOreFrequency; i++) {
                         int randPosX = chunkX + rand.nextInt(16);
-                        int randPosY = 64+rand.nextInt(64); //  MAX Y LEVEL YOU WANT TO SEE YOUR ORE
+                        int randPosY = 64+rand.nextInt(64); 
                         int randPosZ = chunkZ + rand.nextInt(16);
- 
-                        // CHANGE THE 6 BELOW TO THE MAX AMOUNT OF NODES YOU WANT IN A VEIN
-                        (new WorldGenMinable(Core.xaloriumOre.blockID, 3+rand.nextInt(5))).generate(world, rand, randPosX, randPosY, randPosZ);
+                        (new WorldGenMinable(Core.xaloriumOre.blockID, 3+rand.nextInt(13))).generate(world, rand, randPosX, randPosY, randPosZ);
                 }
         }
  
