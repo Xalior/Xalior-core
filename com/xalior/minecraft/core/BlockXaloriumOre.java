@@ -28,7 +28,7 @@ public class BlockXaloriumOre extends Block {
         this.glowing = par2;
 		setHardness(1.00F);
 		setResistance(15.00F);
-		setLightValue(1F);
+		setLightValue(0.75F);
 		setStepSound(Block.soundGlassFootstep);
 		setUnlocalizedName("xaloriumOre");
 		setCreativeTab(CreativeTabs.tabBlock);
@@ -101,6 +101,24 @@ public class BlockXaloriumOre extends Block {
         return this.quantityDropped(par2Random) + par2Random.nextInt(par1 + 1);
     }
 
+    @SideOnly(Side.CLIENT)
+    /**
+     * A randomly called display update to be able to add particles or other items for display
+     */
+    public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
+    {
+        if (this.glowing)
+        {
+            this.sparkle(par1World, par2, par3, par4);
+        }
+    }
+
+    public int getRenderBlockPass()
+    {
+		return 1;
+    	
+    }
+    
     /**
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
@@ -117,18 +135,6 @@ public class BlockXaloriumOre extends Block {
     {
         return false;
     }
-    @SideOnly(Side.CLIENT)
-    /**
-     * A randomly called display update to be able to add particles or other items for display
-     */
-    public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
-    {
-        if (this.glowing)
-        {
-            this.sparkle(par1World, par2, par3, par4);
-        }
-    }
-
     private final String[] particleList = {"largesmoke", "smoke", "cloud","suspended", "depthsuspend", "townaura"};
     
     /**
