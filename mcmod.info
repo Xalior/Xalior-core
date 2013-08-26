@@ -1,0 +1,12 @@
+[{
+	"modid": "xalior-core",
+	"name": "Xalior Core",
+	"description": "A mod to add base blocks for Xalior's mods",
+	"version": "0.0.1",
+	"mcversion": "1.6.2",
+	"url": "http://Xalior.com/minecraft/core/",
+	"updateUrl": "http://Xalior.com/minecraft/core/download/",
+	"authors": [ "Xalior" ],
+	"credits": "Authored By Xalior, Ideas By Essk",
+	"requiredMods": [ "Forge" ]
+}]
