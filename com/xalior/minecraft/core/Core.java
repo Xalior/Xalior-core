@@ -30,6 +30,7 @@ public class Core {
 	
 	/* Blocks */
 	public static int blockXaloriumOreID;
+	public static int blockXaloriumID;
 	
 	/* Items */
 	public static int itemXaloriumDustID;
@@ -41,6 +42,7 @@ public class Core {
 	
 	/* Our new Blocks */
 	public static Block xaloriumOre;
+	public static Block xaloriumBlock;
 	
 	/* Our new Items */
 	public static Item xaloriumDust;
@@ -71,6 +73,7 @@ public class Core {
 		itemXaloriumDustID = config.getItem("itemXaloriumDustID", 1301).getInt();
 		itemXaloriumPigIngotID = config.getItem("itemXaloriumPigIngotID", 1302).getInt();
 		itemXaloriumIngotID = config.getItem("itemXaloriumIngotID", 1303).getInt();
+		blockXaloriumID = config.getBlock("blockXaloriumID", 1304).getInt();
 		
 		settingXaloriumOreFrequency = config.get(config.CATEGORY_GENERAL, "xaloriumOreFrequency", 64).getInt();
 		
@@ -103,16 +106,25 @@ public class Core {
         xaloriumIngot = new ItemXaloriumIngot(itemXaloriumIngotID);
         LanguageRegistry.addName(xaloriumIngot, "Xalorium Ingot");
 		GameRegistry.registerItem(xaloriumIngot, "itemXaloriumIngotID");
+		/* Xalorium Blocks */
+		xaloriumBlock = new BlockXalorium(blockXaloriumID, Material.rock);
+		LanguageRegistry.addName(xaloriumBlock, "Xalorium Block");
+		MinecraftForge.setBlockHarvestLevel(xaloriumBlock, "pickaxe", 1);
+		GameRegistry.registerBlock(xaloriumBlock, "xaloriumBlock");		
+		
 		/* 'Micro-optimisations' for stacks */
 		ItemStack xaloriumPigIngotStack = new ItemStack(xaloriumPigIngot);
+		ItemStack xaloriumIngotStack = new ItemStack(xaloriumIngot);
+		
 		/* Crafting Stuffs */
 		GameRegistry.addShapelessRecipe(new ItemStack(xaloriumIngot),
 				xaloriumPigIngotStack, xaloriumPigIngotStack);
+        GameRegistry.addRecipe(new ItemStack(xaloriumBlock), "xxx", "xxx","xxx",
+                'x', xaloriumIngotStack);
+		
 		/* Smelting Stuffs */
 		GameRegistry.addSmelting(blockXaloriumOreID, xaloriumPigIngotStack, 0.1F);
-		/* Xalorium Ingots */
-		//GameRegistry.registerItem(itemXaloriumDustID, "itemXaloriumDustID");
-		
+		/* Xalorium Blocks */
 		
 		proxy.registerRenderers();
 	}
