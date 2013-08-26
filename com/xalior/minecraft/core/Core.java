@@ -84,7 +84,7 @@ public class Core {
 		
 		log(String.format("Initialized (%s) ", this.getVersion()));
 		/* Xalorium Ore */
-		xaloriumOre = new BlockXaloriumOre(blockXaloriumOreID, Material.rock);
+		xaloriumOre = new BlockXaloriumOre(blockXaloriumOreID, true);
 		LanguageRegistry.addName(xaloriumOre, "Xalorium Ore");
 		MinecraftForge.setBlockHarvestLevel(xaloriumOre, "pickaxe", 1);
 		GameRegistry.registerBlock(xaloriumOre, "xaloriumOre");
