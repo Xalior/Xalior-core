@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.common.MinecraftForge;
@@ -80,10 +81,10 @@ public class Core {
 	
 	@EventHandler // used in 1.6.2
 	public void load(FMLInitializationEvent event) {
-		xaloriumOre = new BlockXaloriumOre(blockXaloriumOreID, Material.rock);
 		
 		log(String.format("Initialized (%s) ", this.getVersion()));
 		/* Xalorium Ore */
+		xaloriumOre = new BlockXaloriumOre(blockXaloriumOreID, Material.rock);
 		LanguageRegistry.addName(xaloriumOre, "Xalorium Ore");
 		MinecraftForge.setBlockHarvestLevel(xaloriumOre, "pickaxe", 1);
 		GameRegistry.registerBlock(xaloriumOre, "xaloriumOre");
@@ -95,7 +96,20 @@ public class Core {
 		/* Xalorium Dust ::FIXME:: find a grinder API! */
 		//GameRegistry.registerItem(itemXaloriumDustID, "itemXaloriumDustID");
 		/* Xalorium Pig Ingots */
+        xaloriumPigIngot = new ItemXaloriumPigIngot(itemXaloriumPigIngotID);
+        LanguageRegistry.addName(xaloriumPigIngot, "Xalorium Pig Ingot");
 		GameRegistry.registerItem(xaloriumPigIngot, "itemXaloriumPigIngotID");
+		/* Xalorium Ingots */
+        xaloriumIngot = new ItemXaloriumIngot(itemXaloriumIngotID);
+        LanguageRegistry.addName(xaloriumIngot, "Xalorium Ingot");
+		GameRegistry.registerItem(xaloriumIngot, "itemXaloriumIngotID");
+		/* 'Micro-optimisations' for stacks */
+		ItemStack xaloriumPigIngotStack = new ItemStack(xaloriumPigIngot);
+		/* Crafting Stuffs */
+		GameRegistry.addShapelessRecipe(new ItemStack(xaloriumIngot),
+				xaloriumPigIngotStack, xaloriumPigIngotStack);
+		/* Smelting Stuffs */
+		GameRegistry.addSmelting(blockXaloriumOreID, xaloriumPigIngotStack, 0.1F);
 		/* Xalorium Ingots */
 		//GameRegistry.registerItem(itemXaloriumDustID, "itemXaloriumDustID");
 		
